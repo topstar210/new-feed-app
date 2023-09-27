@@ -7,7 +7,7 @@
       <button class="btn-basic">About</button>
       <div>
         Contact info for convenient chat
-        <a href="https://t.me/AlSmile0210">telegram</a>
+        <a href="https://t.me/AlSmile0210">telegram</a> <br />
         <a href="https://join.skype.com/invite/u7wpUCf5vKVC">Skype</a>
       </div>
     </div>
