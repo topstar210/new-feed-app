@@ -5,6 +5,11 @@
       <button class="btn-basic highlight" @click="goToNewsScreen">View News</button>
       <button class="btn-basic">My favorites</button>
       <button class="btn-basic">About</button>
+      <div>
+        Contact info for convenient chat
+        <a href="https://t.me/AlSmile0210">telegram</a>
+        <a href="https://join.skype.com/invite/u7wpUCf5vKVC">Skype</a>
+      </div>
     </div>
   </div>
 </template>
