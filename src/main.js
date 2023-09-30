@@ -5,10 +5,12 @@ import App from './App.vue'
 
 import HomeScreen from './pages/HomeScreen.vue'
 import NewsScreen from './pages/NewsScreen.vue'
+import LikeNewsScreen from './pages/LikeNewsScreen.vue'
 
 const routes = [
     { path: '/', component: HomeScreen },
     { path: '/news', component: NewsScreen },
+    { path: '/like-news', component: LikeNewsScreen },
 ]
 
 const router = createRouter({

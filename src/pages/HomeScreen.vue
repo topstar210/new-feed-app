@@ -2,8 +2,8 @@
   <div class="launch-screen">
     <div>
       <div class="logo" style="margin-bottom:10px">News Feed</div>
-      <button class="btn-basic highlight" @click="goToNewsScreen">View News</button>
-      <button class="btn-basic">My favorites</button>
+      <button class="btn-basic highlight" @click="$router.push('/news')">View News</button>
+      <button class="btn-basic" @click="$router.push('/like-news')">My favorites</button>
       <button class="btn-basic">About</button>
       <div>
         Contact info for convenient chat
@@ -18,11 +18,7 @@
 export default {
   name: "HomeScreen",
 
-  methods: {
-    goToNewsScreen() {
-        this.$router.push('/news')
-    }
-  }
+  methods: {}
 };
 </script>
 
