@@ -15,7 +15,6 @@ export default {
 @import "./styles/global.scss";
 #app {
     font-family: var(--font-1), Avenir, Helvetica, Arial, sans-serif;
-    text-align: center;
     color: #fff;
     background: #222;
     display: flex;

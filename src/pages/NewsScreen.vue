@@ -22,8 +22,8 @@ import backIcon from "../assets/back.png";
 </script>
 
 <script>
-import { parse } from 'node-html-parser';
-import axios from 'axios';
+import { parse } from "node-html-parser";
+import axios from "axios";
 
 import GameCardsStack from "../components/GameCardsStack";
 
@@ -36,12 +36,18 @@ export default {
 
   data() {
     return {
-      visibleCards: ["Test1", "Test2", "Test3"],
+      visibleCards: [],
     };
   },
 
   methods: {
-    handleCardAccepted() {
+    handleCardAccepted(data) {
+      const storeData = JSON.parse(localStorage.likeData ?? JSON.stringify([]));
+      const acceptedCard = Object.assign({}, data);
+      const ind = storeData.findIndex((val) => acceptedCard.guid == val.guid);
+      if(ind == -1) storeData.push(acceptedCard);
+      localStorage.setItem('likeData', JSON.stringify(storeData));
+
       console.log("handleCardAccepted");
     },
     handleCardRejected() {
@@ -62,30 +68,28 @@ export default {
   async created() {
     const response = await axios.get('https://cors-anywhere.herokuapp.com/https://feeder.co/out/folder/e372a60a28.rss');
     const root = parse(response.data);
-
-    const feedAry = root.getElementsByTagName('item');
-    const newsFeed = feedAry.map((item)=>{
-      const linkInd = item.childNodes.findIndex((val) => val?.rawTagName=='link');
-      const link = item.childNodes[linkInd+1]?._rawText;
+    const feedAry = root.getElementsByTagName("item");
+    const newsFeed = feedAry.map((item) => {
+      const linkInd = item.childNodes.findIndex((val) => val?.rawTagName == "link");
+      const link = item.childNodes[linkInd + 1]?._rawText;
       return {
-        title: item.getElementsByTagName('title')[0].childNodes[0]._rawText,
-        'media:content': item.getElementsByTagName('media:content')[0]?.getAttribute('url'),
-        'feeder:image': item.getElementsByTagName('feeder:image')[0]?.getAttribute('url'),
-        description: item.getElementsByTagName('description')[0].childNodes[0]?._rawText ?? "",
-        pubDate: item.getElementsByTagName('pubDate')[0].childNodes[0]?._rawText,
-        guid: {
-          isPermaLink: item.getElementsByTagName('guid')[0]?.getAttribute('isPermaLink'),
-          value: item.getElementsByTagName('guid')[0].childNodes[0]?._rawText
-        },
+        title: item.getElementsByTagName("title")[0].childNodes[0]._rawText,
+        media: item
+          .getElementsByTagName("media:content")[0]
+          ?.getAttribute("url"),
+        feeder: item.getElementsByTagName("feeder:image")[0]?.getAttribute("url"),
+        description:
+          item.getElementsByTagName("description")[0].childNodes[0]?._rawText ?? "",
+        pubDate: item.getElementsByTagName("pubDate")[0].childNodes[0]?._rawText,
+        guid: item.getElementsByTagName("guid")[0].childNodes[0]?._rawText,
         source: {
-          url: item.getElementsByTagName('source')[0]?.getAttribute('url'),
+          url: item.getElementsByTagName("source")[0]?.getAttribute("url"),
         },
-        link
-      }
-    })
-    console.log(newsFeed);
-    // this.visibleCards = newsFeed;
-  }
+        link,
+      };
+    });
+    this.visibleCards = newsFeed;
+  },
 };
 </script>
 

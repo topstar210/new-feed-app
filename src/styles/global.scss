@@ -8,6 +8,18 @@ a {
     color: var(--en-2l)
 }
 
+h1 {
+    font-size: 1.17em !important;
+}
+
+h2 {
+    font-size: 1.15em !important;
+}
+
+h3 {
+    font-size: 1.13em !important;
+}
+
 body {
     font-size: 1.4rem;
     margin: 0;
@@ -104,8 +116,10 @@ button {
     overflow: hidden
 }
 
-.back-btn{
+.back-btn {
     width: 100%;
+    margin-bottom: 0;
+    border-radius: 0
 }
 
 @media (min-width: 400px) {
@@ -118,4 +132,28 @@ button {
     .btn-basic {
         font-size: 1.65rem !important
     }
+}
+
+.cardDescription img{
+    height: auto !important;
+}
+
+/* scroll bar */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    border-radius: 8px;
+
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--button-basic-bg-color);
+    border-radius: 8px;
 }
