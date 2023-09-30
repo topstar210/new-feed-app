@@ -184,7 +184,7 @@ $fs-card-title: 1.1em;
 .card {
   @include card();
   @include absolute(0);
-  @include sizing(100% 62vh);
+  @include sizing(100% 70vh);
   @include flex-center();
 
   @include after() {
