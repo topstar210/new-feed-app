@@ -74,6 +74,8 @@ export default {
     const element = this.$refs.interactElement;
 
     interact(element).draggable({
+      inertia: true,
+
       onstart: () => {
         this.isInteractAnimating = false;
       },
@@ -95,7 +97,6 @@ export default {
         const { x, y } = this.interactPosition;
         const { interactXThreshold, interactYThreshold } = this.$options.static;
         this.isInteractAnimating = true;
-
         if (x > interactXThreshold) this.playCard(ACCEPT_CARD);
         else if (x < -interactXThreshold) this.playCard(REJECT_CARD);
         else if (y > interactYThreshold) this.playCard(SKIP_CARD);
@@ -164,7 +165,7 @@ export default {
     htmlDecode(input) {
       let doc = new DOMParser().parseFromString(input, "text/html");
       return doc.documentElement.textContent;
-    }
+    },
   },
 };
 </script>
@@ -221,18 +222,18 @@ $fs-card-title: 1.1em;
     transition: transform 0.7s $ease-out-back;
   }
 
-  &>div {
+  & > div {
     width: 100%;
     height: 100%;
     display: block;
     overflow: auto;
-    .cardMedia{
+    .cardMedia {
       width: 100%;
     }
-    .cardPubDate{
+    .cardPubDate {
       margin-top: 5px;
     }
-    h1{
+    h1 {
       font-size: 1.19em !important;
     }
   }
