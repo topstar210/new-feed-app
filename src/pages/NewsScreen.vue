@@ -18,7 +18,7 @@
       <div class="loadding" v-if="loading">
         <img :src="loadingIcon" width="100" alt="" />
       </div>
-      <div class="showing-issue" v-if="issueMsg!==''">
+      <div class="showing-issue" v-if="issueMsg !== ''">
         {{ issueMsg }}
       </div>
     </div>
@@ -42,7 +42,6 @@ import loadingIcon from "../assets/loading.gif";
 </script>
 
 <script>
-import { parse } from "node-html-parser";
 import axios from "axios";
 import GameCardsStack from "../components/GameCardsStack";
 
@@ -60,7 +59,7 @@ export default {
       likeCard: false,
       dislikeCard: false,
 
-      issueMsg: ""
+      issueMsg: "",
     };
   },
 
@@ -92,38 +91,18 @@ export default {
       this.$router.push("/");
     },
     openNews() {
-      if(this.visibleCards.length){
-        window.open(this.visibleCards[0].link, 'popup');
+      if (this.visibleCards.length) {
+        window.open(this.visibleCards[0].link, "popup");
       }
-    }
+    },
   },
   async created() {
     this.loading = true;
     try {
-      const response = await axios.get(
-        "https://cors-anywhere.herokuapp.com/https://feeder.co/out/folder/e372a60a28.rss"
-      );
-      const root = parse(response.data);
-      const feedAry = root.getElementsByTagName("item");
-      const newsFeed = feedAry.map((item) => {
-        const linkInd = item.childNodes.findIndex((val) => val?.rawTagName == "link");
-        const link = item.childNodes[linkInd + 1]?._rawText;
-        return {
-          title: item.getElementsByTagName("title")[0].childNodes[0]._rawText,
-          media: item.getElementsByTagName("media:content")[0]?.getAttribute("url"),
-          feeder: item.getElementsByTagName("feeder:image")[0]?.getAttribute("url"),
-          description:
-            item.getElementsByTagName("description")[0].childNodes[0]?._rawText ?? "",
-          pubDate: item.getElementsByTagName("pubDate")[0].childNodes[0]?._rawText,
-          guid: item.getElementsByTagName("guid")[0].childNodes[0]?._rawText,
-          source: {
-            url: item.getElementsByTagName("source")[0]?.getAttribute("url"),
-          },
-          link,
-        };
-      });
-  
-      this.visibleCards = newsFeed;
+      const response = await axios.get('https://api.rss2json.com/v1/api.json?rss_url=https://feeder.co/out/folder/e372a60a28.rss&api_key=3qdm7zptkuwegyy5o5yuibs8pvcumt6dfhngmoyt&count=1000');
+      const { items } = response.data;
+
+      this.visibleCards = items;
     } catch (err) {
       console.error(err);
       this.issueMsg = err.message;
@@ -172,12 +151,12 @@ export default {
   position: relative;
 }
 
-.loadding{
+.loadding {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.showing-issue{
+.showing-issue {
   text-align: center;
 }
 </style>

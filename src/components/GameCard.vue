@@ -12,8 +12,8 @@
     <div v-if="isCurrent">
       <h1 class="cardTitle">{{ card.title }}</h1>
       <!-- <img class="cardMedia" :src="card.media" /> -->
-      <div class="cardDescription" v-html="htmlDecode(card.description)"></div>
-      <small class="cardPubDate">{{ card.pubDate }}</small>
+      <div class="cardDescription" v-html="card.description"></div>
+      <!-- <small class="cardPubDate">{{ card.pubDate }}</small> -->
     </div>
   </div>
 </template>
