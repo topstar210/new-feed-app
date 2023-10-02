@@ -161,10 +161,11 @@ button {
 
 .control-area {
     --btn-frame-diameter: 100px;
+    --btn-frame-small-diameter:50px;
+    --btn-frame-small-top: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;
     position: relative;
     z-index: 900;
     height: 12vh;
@@ -216,4 +217,24 @@ button {
     background-color: var(--leaveup-bg-color);
     box-shadow: 0 .4rem var(--leaveup-shadow-color);
     background-image: url(../assets/like.png),var(--fade-bg-gradient)
+}
+.button-opennews{
+    background-color: var(--examine-bg-color);
+    box-shadow: 0 .4rem var(--examine-shadow-color);
+    background-image: url(../assets/eye.svg),var(--fade-bg-gradient)
+}
+.button-frame.small {
+    position: relative;
+    height: var(--btn-frame-small-diameter);
+    width: var(--btn-frame-small-diameter);
+    min-height: 62px;
+    min-width: 62px;
+    top: min(var(--btn-frame-small-top),9px)
+}
+.button-frame.small>button {
+    width: calc(var(--btn-frame-small-diameter) - 2.6rem);
+    height: calc(var(--btn-frame-small-diameter) - 2.6rem);
+    min-height: calc(62px - 2.6rem);
+    min-width: calc(62px - 2.6rem);
+    padding: 17%
 }

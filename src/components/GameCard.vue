@@ -42,6 +42,14 @@ export default {
       type: Boolean,
       required: true,
     },
+    isLike: {
+      type: Boolean,
+      required: true,
+    },
+    isDisLike: {
+      type: Boolean,
+      required: true,
+    }
   },
 
   data() {
@@ -104,7 +112,16 @@ export default {
       },
     });
   },
-
+  watch: {
+    isLike(newValue) {
+      console.log(`isLike--------- ${newValue}`);
+      this.playCard(ACCEPT_CARD);
+    },
+    isDisLike(newValue) {
+      console.log(`isDisLike--------- ${newValue}`);
+      this.playCard(REJECT_CARD);
+    }
+  },
   methods: {
     hideCard() {
       setTimeout(() => {

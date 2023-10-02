@@ -5,6 +5,8 @@
       :key="card"
       :card="card"
       :is-current="index === 0"
+      :isLike="index === 0 && isLike"
+      :isDisLike="index === 0 && isDisLike"
       @cardAccepted="$emit('cardAccepted', card)"
       @cardRejected="$emit('cardRejected')"
       @cardSkipped="$emit('cardSkipped')"
@@ -20,13 +22,35 @@ export default {
   components: {
     GameCard,
   },
-
+  data() {
+    return {
+      isLike: false,
+      isDisLike: false
+    };
+  },
   props: {
     cards: {
       type: Array,
       required: true,
     },
+    likeCard: {
+      type: Boolean,
+      required: true,
+    },
+    dislikeCard: {
+      type: Boolean,
+      required: true,
+    },
   },
+  watch: {
+    likeCard(newValue) {
+      this.isLike = newValue;
+    },
+    dislikeCard(newValue) {
+      this.isDisLike = newValue;
+    },
+  },
+  mounted() {},
 };
 </script>
 
