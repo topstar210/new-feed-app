@@ -9,16 +9,28 @@
     class="card"
     :style="{ transform: transformString }"
   >
-    <div>
-      <h1 class="cardTitle">{{ card.title }}</h1>
-      <!-- <img class="cardMedia" :src="card.media" /> -->
-      <div class="cardDescription" v-html="card.content"></div>
-      <!-- <small class="cardPubDate">{{ card.pubDate }}</small> -->
+    <div :style="{ backgroundImage: 'url(' + getDataFromContant(card.content)[0] + ')' }">
+      <small class="cardPubDate">{{ card.pubDate }}</small>
+      <div class="data">
+        <div class="content">
+          <span class="author">{{ getDomain(card.link) }}</span>
+          <h1 class="title">
+            <a href="#">{{ card.title }}</a>
+          </h1>
+          <p class="text">
+            {{ getDataFromContant(card.content)[1] }}
+          </p>
+          <div style="text-align: center">
+            <a :href="card.link" class="button" target="_blank">Read more</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import parse from "node-html-parser";
 import interact from "interact.js";
 const ACCEPT_CARD = "cardAccepted";
 const REJECT_CARD = "cardRejected";
@@ -183,6 +195,27 @@ export default {
       let doc = new DOMParser().parseFromString(input, "text/html");
       return doc.documentElement.textContent;
     },
+
+    getDomain(url) {
+      const domainName = url.match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i)[1];
+      return domainName;
+    },
+
+    getDataFromContant(content) {
+      const root = parse(content, {
+        lowerCaseTagName: false,
+        comment: false,
+        voidTag: {
+          tags: ["img", "source"],
+          closingSlash: true,
+        },
+      });
+      
+      return [
+        root.getElementsByTagName("img")[0]?.getAttribute('src'),
+        root.getElementsByTagName("p")[0]?.innerText
+      ];
+    },
   },
 };
 </script>
@@ -204,19 +237,9 @@ $fs-card-title: 1.1em;
   @include sizing(94% 60vh);
   @include flex-center();
 
-  @include after() {
-    @include sizing(21px 3px);
-    @include absolute(right 0 bottom 11px left 0);
-
-    margin: auto;
-    border-radius: 100px;
-    background: rgba($c-black, 0.3);
-  }
-
   display: flex;
   max-height: 600px;
   margin: auto;
-  padding: 10px 5px 25px;
   color: $c-white;
   background-image: linear-gradient(
     -180deg,
@@ -230,6 +253,7 @@ $fs-card-title: 1.1em;
   user-select: none;
   pointer-events: none;
   will-change: transform, opacity;
+  overflow: hidden;
 
   &.isCurrent {
     pointer-events: auto;
@@ -242,16 +266,40 @@ $fs-card-title: 1.1em;
   & > div {
     width: 100%;
     height: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow: auto;
-    .cardMedia {
-      width: 100%;
-    }
+    background-size: cover;
+    background-position: center;
+    border-radius: 11px;
     .cardPubDate {
-      margin-top: 5px;
+      padding: 10px 15px;
     }
-    h1 {
-      font-size: 1.19em !important;
+    &:hover {
+      .data {
+        transform: translateY(0);
+      }
+    }
+    .data {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      transform: translateY(calc(80px + 1em));
+      transition: transform 0.3s;
+      background: linear-gradient(-180deg, #27272700 2%, #000 100%);
+      .content {
+        padding: 1em;
+        position: relative;
+        z-index: 1;
+        h1 > a {
+          color: #fff;
+          text-decoration: none;
+        }
+        .button {
+          text-align: center;
+        }
+      }
     }
   }
 }
@@ -278,10 +326,6 @@ $fs-card-title: 1.1em;
 
     @if $i != 1 {
       background-image: none;
-
-      @include after() {
-        @include sizing(0 0);
-      }
     }
   }
 }
