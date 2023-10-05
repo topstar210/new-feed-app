@@ -9,7 +9,7 @@
     class="card"
     :style="{ transform: transformString }"
   >
-    <div v-if="isCurrent">
+    <div>
       <h1 class="cardTitle">{{ card.title }}</h1>
       <!-- <img class="cardMedia" :src="card.media" /> -->
       <div class="cardDescription" v-html="card.content"></div>
@@ -49,7 +49,7 @@ export default {
     isDisLike: {
       type: Boolean,
       required: true,
-    }
+    },
   },
 
   data() {
@@ -120,7 +120,7 @@ export default {
     isDisLike(newValue) {
       console.log(`isDisLike--------- ${newValue}`);
       this.playCard(REJECT_CARD);
-    }
+    },
   },
   methods: {
     hideCard() {
@@ -201,7 +201,7 @@ $fs-card-title: 1.1em;
 .card {
   @include card();
   @include absolute(0);
-  @include sizing(100% 70vh);
+  @include sizing(94% 60vh);
   @include flex-center();
 
   @include after() {
@@ -258,19 +258,21 @@ $fs-card-title: 1.1em;
 
 @for $i from 1 through $cardsTotal {
   $index: $i - 1;
-  $translation: $cardsPositionOffset * $index;
+  $translation: $cardsPositionOffset * $index * -1;
   $scale: 1 - ($cardsScaleOffset * $index);
 
   .card:nth-child(#{$i}) {
     z-index: $cardsTotal - $index;
-    opacity: 1;
     transform: translateY($translation) scale($scale);
+    @if $i < 4 {
+      border: 5px solid;
+      border-color: $card-border;
+      opacity: 1;
+    }
 
     @if $i == 3 {
-      color: $c-red-25;
       background-color: $c-red-25;
     } @else if $i == 2 {
-      color: $c-red-50;
       background-color: $c-red-50;
     }
 
@@ -281,6 +283,12 @@ $fs-card-title: 1.1em;
         @include sizing(0 0);
       }
     }
+  }
+}
+
+@media (max-height: 600px) {
+  .card {
+    height: 60vh;
   }
 }
 </style>

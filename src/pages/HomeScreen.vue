@@ -1,28 +1,54 @@
 <template>
   <div class="launch-screen">
     <div>
-      <div class="logo" style="margin-bottom:10px">News Feed</div>
-      <button class="btn-basic highlight" @click="$router.push('/news')">View News</button>
-      <button class="btn-basic" @click="$router.push('/like-news')">My favorites</button>
-      <button class="btn-basic">About</button>
-      <div>
-        Contact info for convenient chat
-        <a href="https://t.me/AlSmile0210">telegram</a> <br />
-        <a href="https://join.skype.com/invite/u7wpUCf5vKVC">Skype</a>
+      <div class="logo">
+        <img :src="logoIcon" alt="logo" />
+        <div>by <b>zonecrypto.com</b></div>
+      </div>
+      <div class="btn-list">
+        <button class="btn-basic highlight" @click="$router.push('/news')">
+          <img :src="newsFeedIcon" alt="" />
+          News Feed
+        </button>
+        <button class="btn-basic" @click="$router.push('/like-news')">
+          <img :src="savedIcon" alt="" />
+          Saved News
+        </button>
+        <button class="btn-basic"><img :src="aboutIcon" alt="" />About</button>
+      </div>
+      <div class="footer">
+        <img :src="logo" alt="">
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import logoIcon from "../assets/sorter_logo.svg";
+import newsFeedIcon from "../assets/Huge-icon.svg";
+import savedIcon from "../assets/Subtract.svg";
+import aboutIcon from "../assets/about.svg";
+import logo from "../assets/zonecrypto-svglogo.svg";
+</script>
 <script>
 export default {
   name: "HomeScreen",
-
-  methods: {}
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.logo {
+  display: grid;
+  margin-top: 90px;
+  img {
+    margin: auto;
+  }
+  > div {
+    text-align: center;
+    font-weight: 500;
+    font-size: 13.7px;
+  }
+}
 .launch-screen {
   display: flex;
   flex-direction: column;
@@ -33,15 +59,36 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1000;
-  padding: 3rem;
-  background: var(--modal-bg-color);
+  background: url(../assets/Dolphin_fin.png);
+  background-position: center;
+  background-size: cover;
 }
 .launch-screen > div {
+  width: 100%;
+  height: 100%;
+  background: rgb(39, 39, 39, 0.85);
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+.btn-list {
+  padding: 3rem;
+
+  button {
+    width: 100%;
+    position: relative;
+    img {
+      position: absolute;
+      left: 18px;
+    }
+  }
+}
+
+.footer{
+  display: flex;
   justify-content: center;
-  align-items: stretch;
-  max-height: 100%;
-  overflow: hidden;
+  img{
+    width: 50%;
+  }
 }
 </style>

@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       isLike: false,
-      isDisLike: false
+      isDisLike: false,
     };
   },
   props: {
@@ -58,13 +58,14 @@ export default {
 .cards {
   position: relative;
   display: flex;
-  margin: 25px;
+  align-items: center;
   width: 350px;
+  height: 100%;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 900px) {
   .cards {
-    margin: 20px;
+    width: 90%;
   }
 }
 </style>
