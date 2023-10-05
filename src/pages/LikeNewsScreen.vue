@@ -1,9 +1,15 @@
 <template>
   <div class="news-layout">
     <div class="top-bar">
-      <button class="back-btn btn-basic" @click="gotoHome">
-        <img :src="backIcon" width="30" alt="back" />
-      </button>
+      <div class="back-btn" @click="gotoHome">
+        <img :src="backIcon" width="15" alt="back" />
+      </div>
+      <div>
+        <img :src="homeIcon" width="60" alt="back" />
+      </div>
+      <div class="about-btn">
+        <img :src="aboutIcon" width="25" alt="back" />
+      </div>
     </div>
     <div class="card-area">
       <GameCardsStack
@@ -18,7 +24,9 @@
 </template>
 
 <script setup>
+import aboutIcon from "../assets/about.png";
 import backIcon from "../assets/back.png";
+import homeIcon from "../assets/zonecrypto-svglogo.svg";
 </script>
 
 <script>
@@ -93,12 +101,5 @@ export default {
     );
   background-position: 0 0, 3px 3px;
   background-size: 6px 6px;
-}
-.card-area {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-grow: 1;
-  position: relative;
 }
 </style>

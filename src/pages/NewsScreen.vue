@@ -187,12 +187,6 @@ export default {
   background-position: 0 0, 3px 3px;
   background-size: 6px 6px;
 }
-.card-area {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
 
 .loadding {
   display: flex;
