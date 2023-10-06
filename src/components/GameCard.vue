@@ -10,7 +10,7 @@
     :style="{ transform: transformString }"
   >
     <div :style="{ backgroundImage: 'url(' + getDataFromContant(card.content)[0] + ')' }">
-      <small class="cardPubDate">{{ card.pubDate }}</small>
+      <small class="cardPubDate">{{ formatDate(card.pubDate) }}</small>
       <div class="data">
         <div class="content">
           <span class="author">{{ getDomain(card.link) }}</span>
@@ -20,9 +20,9 @@
           <p class="text">
             {{ getDataFromContant(card.content)[1] }}
           </p>
-          <div style="text-align: center">
-            <a :href="card.link" class="button" target="_blank">Read more</a>
-          </div>
+        </div>
+        <div style="text-align: center">
+          <a :href="card.link" class="button" target="_blank">Read more</a>
         </div>
       </div>
     </div>
@@ -210,11 +210,18 @@ export default {
           closingSlash: true,
         },
       });
-      
+
       return [
-        root.getElementsByTagName("img")[0]?.getAttribute('src'),
-        root.getElementsByTagName("p")[0]?.innerText
+        root.getElementsByTagName("img")[0]?.getAttribute("src"),
+        root.getElementsByTagName("p")[0]?.innerText,
       ];
+    },
+
+    formatDate(dateVal) {
+      const date = new Date(dateVal);
+      const options = { day: "numeric", month: "short", year: "numeric" };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+      return formattedDate;
     },
   },
 };
@@ -234,7 +241,7 @@ $fs-card-title: 1.1em;
 .card {
   @include card();
   @include absolute(0);
-  @include sizing(94% 60vh);
+  @include sizing(calc(100% - 10px) 60vh);
   @include flex-center();
 
   display: flex;
@@ -285,12 +292,15 @@ $fs-card-title: 1.1em;
       position: absolute;
       bottom: 0;
       width: 100%;
+      height: 200px;
       transform: translateY(calc(80px + 1em));
       transition: transform 0.3s;
       background: linear-gradient(-180deg, #27272700 2%, #000 100%);
       .content {
         padding: 1em;
         position: relative;
+        height: 136px;
+        overflow: hidden;
         z-index: 1;
         h1 > a {
           color: #fff;

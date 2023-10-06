@@ -17,18 +17,18 @@
         <button class="btn-basic"><img :src="aboutIcon" alt="" />About</button>
       </div>
       <div class="footer">
-        <img :src="logo" alt="">
+        <Vue3Lottie :animationData="zonecrypto" width="50%"  />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import logoJSON from '../assets/sorter-text-icon.json';
+import logoJSON from '../assets/sorter-icon.json';
 import newsFeedIcon from "../assets/Huge-icon.svg";
 import savedIcon from "../assets/Subtract.svg";
 import aboutIcon from "../assets/about.svg";
-import logo from "../assets/zonecrypto-svglogo.svg";
+import zonecrypto from "../assets/zonecrypto-animated.json";
 </script>
 <script>
 import { Vue3Lottie } from 'vue3-lottie'
@@ -92,8 +92,5 @@ export default {
 .footer{
   display: flex;
   justify-content: center;
-  img{
-    width: 50%;
-  }
 }
 </style>

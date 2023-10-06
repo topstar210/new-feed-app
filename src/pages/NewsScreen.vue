@@ -5,7 +5,7 @@
         <img :src="backIcon" width="15" alt="back" />
       </div>
       <div>
-        <img :src="homeIcon" width="60" alt="back" />
+        <Vue3Lottie :animationData="zonecrypto" :width="60"  />
       </div>
       <div class="about-btn">
         <img :src="aboutIcon" width="25" alt="back" />
@@ -77,7 +77,7 @@
 <script setup>
 import aboutIcon from "../assets/about.png";
 import backIcon from "../assets/back.png";
-import homeIcon from "../assets/zonecrypto-svglogo.svg";
+import zonecrypto from "../assets/zonecrypto-animated.json";
 import loaddingJSON from '../assets/animation-loading.json';
 </script>
 
