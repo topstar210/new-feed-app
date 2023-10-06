@@ -29,7 +29,7 @@
         @hideCard="removeCardFromDeck"
       />
       <div class="loadding" v-if="loading">
-        <img :src="loadingIcon" width="100" alt="" />
+        <Vue3Lottie :animationData="loaddingJSON" :height="150" :width="200" />
       </div>
       <div class="showing-issue" v-if="issueMsg !== ''">
         {{ issueMsg }}
@@ -78,18 +78,20 @@
 import aboutIcon from "../assets/about.png";
 import backIcon from "../assets/back.png";
 import homeIcon from "../assets/zonecrypto-svglogo.svg";
-import loadingIcon from "../assets/loading.gif";
+import loaddingJSON from '../assets/animation-loading.json';
 </script>
 
 <script>
 import axios from "axios";
 import GameCardsStack from "../components/GameCardsStack";
+import { Vue3Lottie } from 'vue3-lottie'
 
 export default {
   name: "NewsScreen",
 
   components: {
     GameCardsStack,
+    Vue3Lottie,
   },
 
   data() {

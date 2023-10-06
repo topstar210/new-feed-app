@@ -2,7 +2,7 @@
   <div class="launch-screen">
     <div>
       <div class="logo">
-        <img :src="logoIcon" alt="logo" />
+        <Vue3Lottie :animationData="logoJSON" :height="100"  />
         <div>by <b>zonecrypto.com</b></div>
       </div>
       <div class="btn-list">
@@ -24,15 +24,20 @@
 </template>
 
 <script setup>
-import logoIcon from "../assets/sorter_logo.svg";
+import logoJSON from '../assets/sorter-text-icon.json';
 import newsFeedIcon from "../assets/Huge-icon.svg";
 import savedIcon from "../assets/Subtract.svg";
 import aboutIcon from "../assets/about.svg";
 import logo from "../assets/zonecrypto-svglogo.svg";
 </script>
 <script>
+import { Vue3Lottie } from 'vue3-lottie'
+
 export default {
   name: "HomeScreen",
+  components: {
+    Vue3Lottie,
+  },
 };
 </script>
 
