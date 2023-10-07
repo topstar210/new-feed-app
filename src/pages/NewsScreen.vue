@@ -5,7 +5,7 @@
         <img :src="backIcon" width="15" alt="back" />
       </div>
       <div>
-        <Vue3Lottie :animationData="zonecrypto" :width="60"  />
+        <Vue3Lottie :animationData="zonecrypto" :width="80"  />
       </div>
       <div class="about-btn">
         <img :src="aboutIcon" width="25" alt="back" />
