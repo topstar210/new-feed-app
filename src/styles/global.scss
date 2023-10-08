@@ -97,7 +97,7 @@ button {
     transform: translateY(.2rem)
 }
 
-.btn-basic.highlight {
+.btn-basic:hover {
     border-radius: 9.75px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 10%, rgba(0, 0, 0, 0.20) 90%), #2871FF;
     box-shadow: 0px 3.9px 0px 0px #153E7A;

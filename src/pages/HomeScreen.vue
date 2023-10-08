@@ -2,41 +2,52 @@
   <div class="launch-screen">
     <div>
       <div class="logo">
-        <Vue3Lottie :animationData="logoJSON" :height="100"  />
+        <Vue3Lottie :animationData="logoJSON" :height="100" />
         <div>by <b>zonecrypto.com</b></div>
       </div>
       <div class="btn-list">
-        <button class="btn-basic highlight" @click="$router.push('/news')">
-          <img :src="newsFeedIcon" alt="" />
+        <button class="btn-basic" @mouseover="hoveritem='newsfeed'" @mouseleave="hoveritem=''" @click="$router.push('/news')">
+          <img :src="hoveritem=='newsfeed'?hovernewsFeedIcon:newsFeedIcon" alt="" />
           News Feed
         </button>
-        <button class="btn-basic" @click="$router.push('/like-news')">
-          <img :src="savedIcon" alt="" />
+        <button class="btn-basic" @mouseover="hoveritem='savednews'" @mouseleave="hoveritem=''" @click="$router.push('/like-news')">
+          <img :src="hoveritem=='savednews'?hoversavedIcon:savedIcon" alt="" />
           Saved News
         </button>
-        <button class="btn-basic"><img :src="aboutIcon" alt="" />About</button>
+        <button class="btn-basic" @mouseover="hoveritem='about'" @mouseleave="hoveritem=''">
+          <img :src="hoveritem=='about'?hoveraboutIcon:aboutIcon" alt="" />
+          About
+        </button>
       </div>
       <div class="footer">
-        <Vue3Lottie :animationData="zonecrypto" width="50%"  />
+        <Vue3Lottie :animationData="zonecrypto" width="50%" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import logoJSON from '../assets/sorter-icon.json';
+import logoJSON from "../assets/sorter-icon.json";
 import newsFeedIcon from "../assets/Huge-icon.svg";
 import savedIcon from "../assets/Subtract.svg";
 import aboutIcon from "../assets/about.svg";
+import hovernewsFeedIcon from "../assets/Huge-icon-hover.svg";
+import hoversavedIcon from "../assets/Subtract-hover.svg";
+import hoveraboutIcon from "../assets/about-hover.svg";
 import zonecrypto from "../assets/zonecrypto-animated.json";
 </script>
 <script>
-import { Vue3Lottie } from 'vue3-lottie'
+import { Vue3Lottie } from "vue3-lottie";
 
 export default {
   name: "HomeScreen",
   components: {
     Vue3Lottie,
+  },
+  data() {
+    return {
+      hoveritem: ""
+    }
   },
 };
 </script>
@@ -85,11 +96,12 @@ export default {
     img {
       position: absolute;
       left: 18px;
+      margin-top: 5px;
     }
   }
 }
 
-.footer{
+.footer {
   display: flex;
   justify-content: center;
 }
