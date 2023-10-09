@@ -7,7 +7,7 @@
       </div>
       <div class="btn-list">
         <button class="btn-basic" @mouseover="hoveritem='newsfeed'" @mouseleave="hoveritem=''" @click="$router.push('/news')">
-          <img :src="hoveritem=='newsfeed'?hovernewsFeedIcon:newsFeedIcon" alt="" />
+          <img :src="hoveritem=='newsfeed'?hovernewsFeedIcon:newsFeedIcon" style="left:16px" alt="" />
           News Feed
         </button>
         <button class="btn-basic" @mouseover="hoveritem='savednews'" @mouseleave="hoveritem=''" @click="$router.push('/like-news')">
