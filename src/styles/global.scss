@@ -198,6 +198,27 @@ button {
     margin-top: 17px;
 }
 
+@media (max-height: 800px) {
+    .card-area {
+        height: 500px;
+        margin-top: 14px;
+    }
+}
+
+@media (max-height: 750px) {
+    .card-area {
+        height: 430px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-height: 680px) {
+    .card-area {
+        height: 390px;
+        margin-top: 8px;
+    }
+}
+
 .button-frame {
     box-sizing: border-box;
     height: var(--btn-frame-diameter);
