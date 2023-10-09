@@ -5,7 +5,7 @@
         <img :src="backIcon" width="15" alt="back" />
       </div>
       <div>
-        <Vue3Lottie :animationData="zonecrypto" :width="80"  />
+        <Vue3Lottie :animationData="zonecrypto" :width="80" />
       </div>
       <div class="about-btn">
         <img :src="aboutIcon" width="25" alt="back" />
@@ -71,6 +71,7 @@
         </div>
       </div>
     </div>
+    <div></div>
   </div>
 </template>
 
@@ -78,13 +79,13 @@
 import aboutIcon from "../assets/about.png";
 import backIcon from "../assets/back.png";
 import zonecrypto from "../assets/zonecrypto-animated.json";
-import loaddingJSON from '../assets/animation-loading.json';
+import loaddingJSON from "../assets/animation-loading.json";
 </script>
 
 <script>
 import axios from "axios";
 import GameCardsStack from "../components/GameCardsStack";
-import { Vue3Lottie } from 'vue3-lottie'
+import { Vue3Lottie } from "vue3-lottie";
 
 export default {
   name: "NewsScreen",
@@ -142,7 +143,7 @@ export default {
 
     cursorShowing(fadeOutTime, fadeInAfterTime) {
       if (this.loading) return;
-      if(!this.$refs?.promptBox) return
+      if (!this.$refs?.promptBox) return;
       setTimeout(() => {
         this.$refs.promptBox.style.transition = `${fadeOutTime}ms`;
         this.$refs.promptBox.style.opacity = "0";
@@ -153,7 +154,7 @@ export default {
       }, 300);
     },
     showMe() {
-      if(!this.$refs?.promptBox) return
+      if (!this.$refs?.promptBox) return;
       this.$refs.promptBox.style.opacity = "1";
     },
   },
@@ -179,6 +180,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  justify-content: space-between;
   position: absolute;
   z-index: 500;
   left: 0;
